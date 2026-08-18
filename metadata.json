@@ -1,0 +1,6 @@
+{
+  "name": "Mall Retail Intelligence",
+  "description": "Smart Space, Vendor, Rent & Revenue Management Platform",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
