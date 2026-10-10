@@ -13,6 +13,7 @@ import {
   BarChart3,
   Award,
   History,
+  Store,
 } from 'lucide-react';
 
 export const Sidebar: React.FC = () => {
@@ -26,6 +27,7 @@ export const Sidebar: React.FC = () => {
   const tabs = [
     { id: 'dashboard', label: 'Executive Dashboard', icon: LayoutDashboard },
     { id: 'spacemap', label: 'Mall Floor / Space Map', icon: Grid3X3 },
+    { id: 'storedirectory', label: 'Store Directory', icon: Store },
     { id: 'vacant', label: 'Vacant Spaces & Loss', icon: Building },
     { id: 'revenue', label: 'Revenue & Payments', icon: CreditCard, badge: overdueCount > 0 ? `${overdueCount} Overdue` : undefined, badgeColor: 'bg-red-500/20 text-red-300 border border-red-500/30' },
     { id: 'applications', label: 'Vendor Applications', icon: FileText, badge: pendingApps > 0 ? `${pendingApps}` : undefined, badgeColor: 'bg-blue-500/20 text-blue-300 border border-blue-500/30' },
@@ -50,14 +52,17 @@ export const Sidebar: React.FC = () => {
           <button
             key={t.id}
             onClick={() => setActiveTab(t.id)}
-            className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl text-xs font-medium transition-all shrink-0 whitespace-nowrap ${
+            className={`group flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl text-xs font-medium transition-all duration-300 shrink-0 whitespace-nowrap overflow-hidden relative ${
               isActive
-                ? 'bg-zinc-800 text-white font-semibold border border-zinc-700/80 shadow-sm'
-                : 'text-zinc-400 hover:bg-zinc-800/50 hover:text-zinc-100'
+                ? 'bg-zinc-800 text-white font-semibold border border-zinc-700/80 shadow-[0_0_15px_rgba(59,130,246,0.15)]'
+                : 'text-zinc-400 hover:bg-zinc-800/50 hover:text-zinc-100 hover:shadow-lg'
             }`}
           >
-            <Icon className={`w-4 h-4 ${isActive ? 'text-blue-400' : 'text-zinc-400'}`} />
-            <span className="flex-1 text-left">{t.label}</span>
+            {isActive && (
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-transparent opacity-50" />
+            )}
+            <Icon className={`w-4 h-4 transition-transform duration-300 group-hover:scale-110 ${isActive ? 'text-blue-400 group-hover:rotate-6' : 'text-zinc-400'}`} />
+            <span className="flex-1 text-left relative z-10 transition-transform duration-300 group-hover:translate-x-1">{t.label}</span>
             {t.badge && (
               <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${t.badgeColor}`}>
                 {t.badge}
